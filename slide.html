@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin:0;
+    }
+    html,body{
+        height: 100%;
+    }
+    .vue{
+        width:300px;
+        height: 100%;
+        padding:30px 10px;
+    }
+    li{
+        padding:5px 0;
+        cursor: pointer;
+    }
+</style>
+<body>
+<div class="vue">
+    <cilicili></cilicili>
+</div>
+</body>
+<script>
+    var obj=[{show:false,"name":"课程学习","children":[{"name":"数学"},{"name":"编程"}]},{show:false,"name":"学习内容","children":[{"name":"高代"},{"name":"数分"},{"name":"离散"}]},{show:false,"name":"难题讲解","children":[{show:false,"name":"常微分"},{"name":"偏微分"}]}];
+    Vue.component("cilicili",{
+        template:"<div><ul v-for='item in obj' ><li v-if='!item.children'>{{item.name}}</li><li v-else @click='item.show=!item.show'>{{item.name}}<ul v-for='items in item.children' v-if='item.show'><li>{{items.name}}</li></ul></li></ul></div>",
+        data:function(){
+            return{
+                obj:obj,
+                show:false
+            }
+        }
+    })
+    new Vue({
+        el:'.vue',
+    })
+</script>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <style>
+        #vue{
+            width: 500px;
+            margin: auto;
+            background: #f9f2f4;
+            border: 1px solid #afd9ee;
+        }
+        h1{
+            text-align: center;
+        }
+        .input{
+            border-top: 1px solid #afd9ee;
+            border-bottom: 1px solid #afd9ee;
+        }
+        input[type=text]{
+            width: 100%;
+            height: 30px;
+            font-size: 18px;
+            outline: none;
+            border: none;
+        }
+        .btns{
+            width: 100%;
+            height:30px;
+            margin-top: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #afd9ee;
+        }
+        .btns input{
+            float: right;
+        }
+        .rad{
+            width: 10px;
+            height: 10px;
+            float: left;
+            border-radius: 50%;
+            background: red;
+            margin: 10px 5px;
+        }
+        .row{
+            width: 100%;
+            height:30px;
+            line-height: 30px;
+            border-bottom: 1px solid #1b6d85;
+        }
+        .con{
+            float: left;
+            color: gold;
+        }
+        .del{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div id="vue">
+    <h1>愿望清单</h1>
+    <div class="input">
+        <input type="text" placeholder="请输入你的愿望" v-model="text" @keydown.13="add" >
+    </div>
+    <div class="btns">
+        <input type="button" value="待实现">
+        <input type="button" value="已实现">
+        <input type="button" value="全部">
+    </div>
+    <div class="row" v-show="all.length>0" v-for="item in all">
+        <div class="rad" @click="changeState(item,item.state)"></div>
+        <div class="con">{{item.con}}</div>
+        <div class="del">删除</div>
+    </div>
+    <div class="row" v-show="all.length==0">
+        <div class="con">没有数据</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:'#vue',
+        data:{
+            all:[],
+            text:"",
+        },
+        methods:{
+            add(){
+                let obj={};
+                obj.id=1000*Math.random()+new Date().getTime();
+                obj.con=this.text;
+                obj.state=0;
+                this.all.push(obj);
+                this.text = '';
+            },
+            del(){
+
+            }
+
+        }
+    })
+</script>
